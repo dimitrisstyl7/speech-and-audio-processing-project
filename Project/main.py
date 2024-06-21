@@ -1,36 +1,57 @@
-import math
+import random as rnd
 
 import numpy as np
 
-from dataset import load_tsv_file, load_audio
+from dataset import load_audio_clips
 from feature_extraction import extract_features
 
 
-def train_models():
-    # Load the train.tsv file
-    train_tsv = load_tsv_file('train.tsv')
+def shuffle_audio_clips_and_labels(audio_clips, labels):
+    """
+    Shuffle the audio clips and labels in the same order.
 
-    # Get a list of all the audio names
-    audio_names = train_tsv['path'].values.tolist()
+    This function shuffles the audio clips and labels in the same order, so that the audio clips and labels
+    remain aligned after shuffling.
 
-    # Create a dict that maps audio names to their durations
-    audio_durations = {row['clip']: row['duration[ms]'] for idx, row in clip_durations_tsv.iterrows()
-                       if row['clip'] in audio_names}
+    Returns the shuffled audio clips and labels as NumPy arrays.
 
-    # Find the median duration of the audio clips
-    median_duration = math.ceil(np.median(list(audio_durations.values())))
+    :param audio_clips: list
+        The list of audio clips.
+    :param labels: list
+        The list of labels.
+    :return: tuple
+        A tuple containing the shuffled audio clips and labels as NumPy arrays.
+        - numpy.ndarray: The shuffled audio clips.
+        - numpy.ndarray: The shuffled labels.
+    """
+    combined = list(zip(audio_clips, labels))
+    rnd.shuffle(combined)
+    audio_clips, labels = zip(*combined)
 
-    # Load audio clips and preprocess them if necessary
-    audio_clips = [load_audio(audio_name, audio_duration, median_duration) for audio_name, audio_duration in
-                   audio_durations.items()]
-
-    # Extract features from the audio clips
-    features = [extract_features(audio_clip[0]) for audio_clip in audio_clips]
+    return np.array(audio_clips), np.array(labels)
 
 
 if __name__ == '__main__':
-    # Load the clip_durations.tsv file
-    clip_durations_tsv = load_tsv_file('clip_durations.tsv')
+    # Load the audio clips
+    foreground_train_audio_clips, foreground_dev_audio_clips, foreground_test_audio_clips, \
+        background_train_audio_clips, background_dev_audio_clips, background_test_audio_clips = load_audio_clips()
 
-    # Train the models (Least Squares, SVM, RNN and MLP)
-    train_models()
+    # Create labels, where foreground is 1 and background is 0
+    foreground_train_labels = [1] * len(foreground_train_audio_clips)
+    background_train_labels = [0] * len(background_train_audio_clips)
+    foreground_dev_labels = [1] * len(foreground_dev_audio_clips)
+    background_dev_labels = [0] * len(background_dev_audio_clips)
+
+    # Combine the foreground and background audio clips and labels
+    train_audio_clips = foreground_train_audio_clips + background_train_audio_clips
+    train_labels = foreground_train_labels + background_train_labels
+    dev_audio_clips = foreground_dev_audio_clips + background_dev_audio_clips
+    dev_labels = foreground_dev_labels + background_dev_labels
+
+    # Shuffle the combined audio clips and labels for better model training
+    train_audio_clips, train_labels = shuffle_audio_clips_and_labels(train_audio_clips, train_labels)
+    dev_audio_clips, dev_labels = shuffle_audio_clips_and_labels(dev_audio_clips, dev_labels)
+
+    # Extract features from the audio clips
+    train_features = np.array([extract_features(audio_clip) for audio_clip in train_audio_clips])
+    dev_features = np.array([extract_features(audio_clip) for audio_clip in dev_audio_clips])
