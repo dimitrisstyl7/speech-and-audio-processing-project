@@ -1,6 +1,6 @@
 # .idea folder
-project/.idea
+.idea
 # __pycache__ folder
-project/__pycache__
-# datasets folder
-datasets
+__pycache__
+# venv folder
+venv
