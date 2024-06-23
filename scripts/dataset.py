@@ -56,10 +56,6 @@ def load_audio_clip(audio_name, directory):
         The directory where the audio file is located. Expected values are 'foreground' or 'background'.
     :return: numpy.ndarray
         The audio data as a numpy array.
-
-    Notes
-    -----
-    - Audio files are expected to be located in the '../datasets/{directory}/clips/' directory.
     """
     audio_clip, _ = librosa.load(f'../datasets/{directory}/clips/{audio_name}', offset=1.5, duration=2)
     return audio_clip

@@ -24,4 +24,3 @@ def extract_features(audio_data):
     melspectrogram = librosa.feature.melspectrogram(y=audio_data, n_fft=n_fft, hop_length=hop_length, n_mels=n_mels)
 
     return librosa.power_to_db(melspectrogram, ref=np.max)
-
