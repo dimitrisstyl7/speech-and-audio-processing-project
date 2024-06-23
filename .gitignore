@@ -1,6 +1,6 @@
 # .idea folder
-Project/.idea
+project/.idea
 # __pycache__ folder
-Project/__pycache__
-# Dataset
-Dataset
+project/__pycache__
+# datasets folder
+datasets

@@ -17,10 +17,11 @@ def extract_features(audio_data):
         The input audio data as a 1-dimensional array.
     :return: numpy.ndarray
         The computed Mel-frequency spectrogram in decibels.
-"""
+    """
     n_fft = 1024  # Window length
     hop_length = n_fft // 2  # Number of samples between successive frames
     n_mels = 96  # Number of Mel bands to generate (filter bank size)
     melspectrogram = librosa.feature.melspectrogram(y=audio_data, n_fft=n_fft, hop_length=hop_length, n_mels=n_mels)
-    return librosa.power_to_db(melspectrogram)
+
+    return librosa.power_to_db(melspectrogram, ref=np.max)
 

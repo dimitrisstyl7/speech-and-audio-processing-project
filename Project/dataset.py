@@ -1,71 +1,65 @@
-import math
+import os
 
 import librosa
-import numpy as np
-import pandas as pd
 
 
-def load_tsv_file(file_name):
+def load_audio_clips():
     """
-    Load a TSV file located in the 'Dataset' directory and return it as a DataFrame.
+    Load foreground and background audio clips from the '../datasets/' directory.
 
-    :param file_name: str
-        The name of the TSV file (without the directory path).
-    :return: pandas.DataFrame
-        The TSV file loaded as a DataFrame.
+    :return: tuple
+        A tuple containing two lists:
+        - List[np.ndarray]: Foreground audio clips.
+        - List[np.ndarray]: Background audio clips.
     """
-    return pd.read_csv(f'..\\Dataset\\{file_name}', sep='\t')
+    # Load and return the foreground and background audio clips.
+    return load_foreground_audio_clips(), load_background_audio_clips()
 
 
-def load_audio(audio_name, audio_duration, median_duration):
+def load_foreground_audio_clips():
     """
-    Load the audio file with the given name and median duration.
+    Load all foreground audio clips from the '../datasets/foreground/clips' directory.
 
-    If the duration of the audio clip (in milliseconds) is less than the median duration,
-    add padding to the end of the audio clip to match the median duration.
+    :return: list
+        - List[numpy.ndarray]: Foreground audio clips.
+    """
+    # Get all foreground audio clips names from the dataset.
+    foreground_audio_clips = os.listdir('../datasets/foreground/clips')
 
-    Returns a tuple of the audio data and the sample rate.
+    # Load and return all foreground audio clips from the dataset.
+    return [load_audio_clip(audio_name, 'foreground') for audio_name in foreground_audio_clips]
+
+
+def load_background_audio_clips():
+    """
+    Load all background audio clips from the '../datasets/background/clips' directory.
+
+    :return: list
+        - List[np.ndarray]: Background audio clips.
+    """
+    # Get all background audio clips from the dataset.
+    background_audio_clips = os.listdir('../datasets/background/clips')
+
+    # Load and return all background audio clips from the dataset.
+    return [load_audio_clip(audio_name, 'background') for audio_name in background_audio_clips]
+
+
+def load_audio_clip(audio_name, directory):
+    """
+    Load an audio clip from 1.5 seconds to 3.5 seconds from the specified directory.
+
+    This function loads the audio data from the '../datasets/{directory}/clips/' directory.
 
     :param audio_name: str
-        The name of the audio file.
-    :param audio_duration: int
-        The duration of the audio clip in milliseconds.
-    :param median_duration: int
-        The median duration of audio clips in milliseconds.
-    :return: tuple
-        A tuple containing:
-        - numpy.ndarray: The audio data.
-        - int: The sample rate (in Hz).
+        The name of the audio file to load.
+    :param directory: str
+        The directory where the audio file is located. Expected values are 'foreground' or 'background'.
+    :return: numpy.ndarray
+        The audio data as a numpy array.
+
+    Notes
+    -----
+    - Audio files are expected to be located in the '../datasets/{directory}/clips/' directory.
     """
-    if audio_duration < median_duration:
-        audio = librosa.load(f'..\\Dataset\\clips\\{audio_name}')
-        return add_ending_padding_to_audio(audio, audio_duration, median_duration)
-    return librosa.load(f'..\\Dataset\\clips\\{audio_name}', duration=median_duration / 1000)
-
-
-def add_ending_padding_to_audio(audio, audio_duration, median_duration):
-    """
-    Add zero padding to the end of the audio clip to make it the same duration as the median duration.
-
-    Returns a tuple of the padded audio data and the sample rate.
-
-    :param audio: tuple
-        A tuple containing:
-        - numpy.ndarray: The audio data.
-        - int: The sample rate (in Hz).
-    :param audio_duration: int
-        The duration of the audio clip in milliseconds.
-    :param median_duration: int
-        The median duration of audio clips in milliseconds.
-    :return: tuple
-        A tuple containing:
-        - numpy.ndarray: The padded audio data.
-        - int: The sample rate (in Hz).
-    """
-    sr = audio[1]  # sample rate
-    desired_total_samples = math.ceil(sr * median_duration / 1000)  # total samples
-    current_samples = math.ceil(sr * audio_duration / 1000)  # current audio samples
-    padding = desired_total_samples - current_samples
-    padded_audio = np.pad(audio[0], (0, padding), 'constant')
-    return padded_audio, sr
-
+    audio_clip, _ = librosa.load(f'../datasets/{directory}/clips/{audio_name}', offset=1.5, duration=2)
+    return audio_clip
