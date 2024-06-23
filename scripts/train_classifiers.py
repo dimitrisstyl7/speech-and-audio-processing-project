@@ -3,6 +3,7 @@ import numpy as np
 from dataset import load_audio_clips
 from feature_extraction import extract_features
 from mlp_classifier import train_mlp_classifier
+from svm_classifier import train_svm_classifier
 
 
 def main():
@@ -32,6 +33,10 @@ def main():
     # MLP (Multi-Layer Perceptron) classifier training
     print('Training MLP classifier...')
     train_mlp_classifier(features, labels)
+
+    # SVM (Support Vector Machine) classifier training
+    print('Training SVM classifier...')
+    train_svm_classifier(features, labels)
 
 
 if __name__ == '__main__':
