@@ -21,7 +21,7 @@ def train_rnn_classifier(X_train, y_train):
     # Create the RNN model.
     model = Sequential()
     model.add(Input(shape=input_shape))
-    model.add(layers.SimpleRNN(64, activation='sigmoid', return_sequences=True, seed=42))
+    model.add(layers.SimpleRNN(64, return_sequences=True, seed=42))
     model.add(layers.Dense(1, activation='sigmoid'))
     model.compile(loss='binary_crossentropy')
 
