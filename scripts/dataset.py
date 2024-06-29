@@ -3,6 +3,8 @@ import sys
 
 import librosa
 
+from common import sr
+
 
 def load_train_audio_clips():
     """
@@ -49,6 +51,9 @@ def load_train_audio_clip(audio_name, directory):
     """
     Load a train audio clip from 1.5 seconds to 3.5 seconds from the specified directory.
 
+    We choose to load the audio clip from 1.5 seconds to 3.5 seconds to minimize the amount
+    of silence at the beginning and end of the audio clip.
+
     This function loads the audio data from the '../datasets/train/{directory}/clips/' directory.
 
     :param audio_name: str
@@ -58,5 +63,36 @@ def load_train_audio_clip(audio_name, directory):
     :return: numpy.ndarray
         The train audio data as a numpy array.
     """
-    audio_clip, _ = librosa.load(f'../datasets/train/{directory}/clips/{audio_name}', offset=1.5, duration=2)
+    audio_clip, _ = librosa.load(f'../datasets/train/{directory}/clips/{audio_name}', sr=sr, offset=1.5, duration=2)
     return audio_clip
+
+
+def load_test_audio_clip(audio_name):
+    """
+    Load a test audio clip from the '../datasets/test/clips/' directory.
+
+    :param audio_name: str
+        The name of the test audio file to load.
+    :return: numpy.ndarray
+        The test audio data as a numpy array.
+    """
+    try:
+        audio_clip, _ = librosa.load(f'../datasets/test/clips/{audio_name}', sr=sr)
+        return audio_clip
+    except FileNotFoundError:
+        print(f'\nError: The file "{audio_name}" was not found in the "{os.getcwd().replace("\\", "/")}'
+              f'/../datasets/test/clips/" directory.\n')
+        sys.exit(1)
+
+
+def get_test_audio_duration(audio_name):
+    """
+    Get the duration of a test audio clip.
+
+    :param audio_name: str
+        The name of the test audio file.
+    :return: float
+        The duration of the test audio clip in seconds.
+    """
+    audio_clip, sr = librosa.load(f'../datasets/test/clips/{audio_name}', sr=None)
+    return librosa.get_duration(y=audio_clip, sr=sr)
