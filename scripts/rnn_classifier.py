@@ -7,9 +7,9 @@ from keras import layers, Sequential, Input
 
 def train_rnn_classifier(X_train, y_train):
     """
-    Train a Recurrent Neural Network (RNN) classifier and save it to a file.
+    Train the Recurrent Neural Network (RNN) classifier and save it to a file.
 
-    This function trains an RNN classifier on the provided training data and labels.
+    This function trains the RNN classifier on the provided training data and labels.
     After training, the classifier is serialized and saved to a file in the '../classifiers/' directory.
 
     :param X_train: numpy.ndarray
@@ -30,7 +30,7 @@ def train_rnn_classifier(X_train, y_train):
     # Train the RNN model.
     model.fit(X_train, y_train, epochs=50, batch_size=32, validation_split=0.15, verbose=0)
 
-    # Save the RNN model to a file.
+    # Save the RNN classifier to a file.
     path = '../classifiers/rnn_classifier.keras'
     model.save(path)
     print(f'RNN classifier saved to {os.getcwd().replace("\\", "/")}/{path}\n')
