@@ -8,6 +8,22 @@ from svm_classifier import train_svm_classifier
 
 
 def main():
+    """
+    Entry point for training audio classifiers.
+
+    This function performs the following steps:
+    1. Loads foreground and background audio clips for training.
+    2. Extracts features from the audio clips using `extract_features`.
+    3. Prepares labels where 1 indicates foreground and 0 indicates background.
+    4. Flattens features and labels for compatibility with classifiers.
+    5. Concatenates flattened features and labels to form training datasets.
+    6. Trains multiple classifiers: MLP (Multi-Layer Perceptron), SVM (Support Vector Machine),
+       and RNN (Recurrent Neural Network).
+       - MLP and SVM classifiers use flattened features.
+       - RNN classifier requires 3D features and 2D labels, prepared by concatenating and
+         transposing initial features and labels.
+    :return: None
+    """
     # Load the train audio clips.
     print('\nLoading train audio clips...\n')
     foreground_train_audio_clips, background_train_audio_clips = load_train_audio_clips()
@@ -37,11 +53,11 @@ def main():
 
     # MLP (Multi-Layer Perceptron) classifier training.
     print('Training MLP classifier...')
-    # train_mlp_classifier(train_features, train_labels)
+    train_mlp_classifier(train_features, train_labels)
 
     # SVM (Support Vector Machine) classifier training.
     print('Training SVM classifier...')
-    # train_svm_classifier(train_features, train_labels)
+    train_svm_classifier(train_features, train_labels)
 
     # RNN (Recurrent Neural Network) classifier training.
     print('Training RNN classifier...')
