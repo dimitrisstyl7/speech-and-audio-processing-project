@@ -95,7 +95,7 @@ def predict_labels(classifier_name, audio_clip_name):
         # Predict and threshold the results to obtain binary labels.
         label_sequence = (clf.predict(test_features) > 0.5).reshape(-1)
     else:
-        # For other classifiers, the features are in the shape (n_frames, n_mels).
+        # For other classifiers (MLP, SVM and Least Squares), the features are in the shape (n_frames, n_mels).
         test_features = np.array(extract_features(test_clip)).transpose(1, 0)
 
         # Predict the labels directly.
@@ -237,7 +237,7 @@ def menu():
                 classifiers_name = os.listdir('../classifiers')
                 for idx, classifier_name in enumerate(classifiers_name):
                     if classifier_name.startswith('lstsq'):
-                        print(f'\t{idx + 1}. Least Squares classifier')
+                        print(f'\t{idx + 1}. Least Squares (LS) classifier')
                     elif classifier_name.startswith('svm'):
                         print(f'\t{idx + 1}. Support Vector Machine (SVM) classifier')
                     elif classifier_name.startswith('mlp'):
@@ -261,7 +261,7 @@ def menu():
                 print('\nYou have chosen the following classifiers:')
                 for idx in chosen_classifiers_indices:
                     if classifiers_name[idx].startswith('lstsq'):
-                        print(f'\t+ Least Squares classifier')
+                        print(f'\t+ Least Squares (LS) classifier')
                     elif classifiers_name[idx].startswith('svm'):
                         print(f'\t+ Support Vector Machine (SVM) classifier')
                     elif classifiers_name[idx].startswith('mlp'):
@@ -276,9 +276,9 @@ def menu():
                     for clf_idx in chosen_classifiers_indices:
                         classifier_name = classifiers_name[clf_idx]
                         if classifier_name.startswith('lstsq'):
-                            print(f'\n+ Detecting words using the Least Squares classifier...')
+                            print(f'\n+ Detecting words using the LS classifier...')
                         elif classifier_name.startswith('svm'):
-                            print(f'\n+ Detecting words using SVM classifier...')
+                            print(f'\n+ Detecting words using the SVM classifier...')
                         elif classifier_name.startswith('mlp'):
                             print(f'\n+ Detecting words using the MLP classifier...')
                         elif classifier_name.startswith('rnn'):
