@@ -6,9 +6,9 @@ from sklearn.neural_network import MLPClassifier
 
 def train_mlp_classifier(X_train, y_train):
     """
-    Train a Multi-Layer Perceptron (MLP) classifier and save it to a file.
+    Train the Multi-Layer Perceptron (MLP) classifier and save it to a file.
 
-    This function trains an MLP classifier on the provided training data and labels.
+    This function trains the MLP classifier on the provided training data and labels.
     After training, the classifier is serialized and saved to a file in the '../classifiers/' directory.
 
     :param X_train: numpy.ndarray
