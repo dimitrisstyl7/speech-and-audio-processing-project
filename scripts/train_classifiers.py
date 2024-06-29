@@ -9,11 +9,11 @@ from svm_classifier import train_svm_classifier
 
 def main():
     # Load the train audio clips.
-    print('\nLoading train audio clips...')
+    print('\nLoading train audio clips...\n')
     foreground_train_audio_clips, background_train_audio_clips = load_train_audio_clips()
 
     # Extract features from the train audio clips.
-    print('Extracting features...')
+    print('Extracting features...\n')
     foreground_train_features = np.array([extract_features(audio_clip) for audio_clip in foreground_train_audio_clips])
     background_train_features = np.array([extract_features(audio_clip) for audio_clip in background_train_audio_clips])
 
@@ -33,23 +33,23 @@ def main():
     train_features = np.concatenate((foreground_train_features_flattened, background_train_features_flattened))
     train_labels = np.concatenate((foreground_train_labels_flattened, background_train_labels_flattened))
 
-    print('Classifiers training started... This may take a while.')
+    print('Classifiers training started... This may take a while.\n')
 
     # MLP (Multi-Layer Perceptron) classifier training.
     print('Training MLP classifier...')
-    train_mlp_classifier(train_features, train_labels)
+    # train_mlp_classifier(train_features, train_labels)
 
     # SVM (Support Vector Machine) classifier training.
     print('Training SVM classifier...')
-    train_svm_classifier(train_features, train_labels)
+    # train_svm_classifier(train_features, train_labels)
 
     # RNN (Recurrent Neural Network) classifier training.
     print('Training RNN classifier...')
 
     # RNN classifier needs a 3D input (X_train), so we don't need the flattened features; instead, we can use
-    # the initial features. Also, the RNN classifier needs the input shape to be (n_samples, n_frames, n_features),
+    # the initial features. Also, the RNN classifier needs the input shape to be (n_samples, n_frames, n_mels),
     # where n_samples is the number of train audio clips, n_frames is the number of frames in each audio clip, and
-    # n_features is the number of features (melspectrogram bins) in each frame. We can achieve this by concatenating
+    # n_mels is the number of features (melspectrogram bins) in each frame. We can achieve this by concatenating
     # and transposing the foreground and background train features.
     train_features = np.concatenate((foreground_train_features, background_train_features)).transpose(0, 2, 1)
 
