@@ -6,9 +6,9 @@ from sklearn.svm import LinearSVC
 
 def train_svm_classifier(X_train, y_train):
     """
-    Train a Support Vector Machine (SVM) classifier and save it to a file.
+    Train the Support Vector Machine (SVM) classifier and save it to a file.
 
-    This function trains an SVM classifier on the provided training data and labels.
+    This function trains the SVM classifier on the provided training data and labels.
     After training, the classifier is serialized and saved to a file in the '../classifiers/' directory.
 
     :param X_train: numpy.ndarray
