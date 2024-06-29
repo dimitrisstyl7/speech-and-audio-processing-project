@@ -2,6 +2,7 @@ import numpy as np
 
 from dataset import load_train_audio_clips
 from feature_extraction import extract_features
+from lstsq_classifier import train_lstsq_classifier
 from mlp_classifier import train_mlp_classifier
 from rnn_classifier import train_rnn_classifier
 from svm_classifier import train_svm_classifier
@@ -58,6 +59,10 @@ def main():
     # SVM (Support Vector Machine) classifier training.
     print('Training SVM classifier...')
     train_svm_classifier(train_features, train_labels)
+
+    # Least Squares classifier training.
+    print('Training LS classifier...')
+    train_lstsq_classifier(train_features, train_labels)
 
     # RNN (Recurrent Neural Network) classifier training.
     print('Training RNN classifier...')
