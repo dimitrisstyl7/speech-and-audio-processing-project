@@ -12,7 +12,7 @@ def train_svm_classifier(X_train, y_train):
     After training, the classifier is serialized and saved to a file in the '../classifiers/' directory.
 
     :param X_train: numpy.ndarray
-        The training data features. Shape should be (n_frames, n_features).
+        The training data features. Shape should be (n_frames, n_mels).
     :param y_train: numpy.ndarray
         The target labels. Shape should be (n_frames,).
     :return: None
@@ -27,4 +27,4 @@ def train_svm_classifier(X_train, y_train):
     # Save the SVM classifier to a file.
     path = '../classifiers/svm_classifier.joblib'
     joblib.dump(clf, path)
-    print(f'SVM classifier saved to {os.getcwd().replace("\\", "/")}/{path}')
+    print(f'SVM classifier saved to {os.getcwd().replace("\\", "/")}/{path}\n')
