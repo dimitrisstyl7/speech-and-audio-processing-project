@@ -126,8 +126,6 @@ def main():
         if idx == len(characters) - 1:
             words_and_timestamps.append((word, start_timestamp, end_timestamp))
 
-    print(words_and_timestamps)
-
     # Save the alignment to a file.
     with open(f'../datasets/test/timestamps/{file_name}.json', 'w') as f:
         json.dump(words_and_timestamps, f, indent=4)
