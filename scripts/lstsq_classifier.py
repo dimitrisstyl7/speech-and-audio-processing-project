@@ -62,7 +62,7 @@ class LeastSquaresClassifier:
 
 def train_lstsq_classifier(X_train, y_train):
     """
-    Train the Least Squares Classifier (LS) using the provided training data.
+    Train the Least Squares classifier (LS) using the provided training data.
 
     This function initializes a LeastSquaresClassifier instance and trains it using the provided training data.
 

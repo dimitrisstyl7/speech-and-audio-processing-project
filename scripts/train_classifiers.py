@@ -19,8 +19,8 @@ def main():
     4. Flattens features and labels for compatibility with classifiers.
     5. Concatenates flattened features and labels to form training datasets.
     6. Trains multiple classifiers: MLP (Multi-Layer Perceptron), SVM (Support Vector Machine),
-       and RNN (Recurrent Neural Network).
-       - MLP and SVM classifiers use flattened features.
+       LS (Least Squares), and RNN (Recurrent Neural Network).
+       - MLP, SVM, and LS classifiers use flattened features.
        - RNN classifier requires 3D features and 2D labels, prepared by concatenating and
          transposing initial features and labels.
     :return: None
@@ -60,7 +60,7 @@ def main():
     print('Training SVM classifier...')
     train_svm_classifier(train_features, train_labels)
 
-    # Least Squares classifier training.
+    # LS (Least Squares) classifier training.
     print('Training LS classifier...')
     train_lstsq_classifier(train_features, train_labels)
 

@@ -39,7 +39,7 @@ def main():
 
     Note:
     - Replace 'VOICE_ID' and 'ENTER_YOUR_API_KEY_HERE' with actual values.
-    - 'file_name' should be the name of the file used for text-to-speech conversion.
+    - Replace 'FILE_NAME' with the name of the txt file used for text-to-speech conversion (without extension).
 
     :return: None
     """

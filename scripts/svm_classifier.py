@@ -16,7 +16,6 @@ def train_svm_classifier(X_train, y_train):
     :param y_train: numpy.ndarray
         The target labels. Shape should be (n_frames,).
     :return: None
-        The trained SVM classifier is saved to a file in the '../classifiers/' directory.
     """
     # Create the SVM classifier.
     clf = LinearSVC(random_state=42)
