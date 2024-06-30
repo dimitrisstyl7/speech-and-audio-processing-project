@@ -1,0 +1,10 @@
+Attribution for ElevenLabs API Usage in Dataset Creation
+
+This dataset includes audio clips and corresponding timestamps that were generated using the ElevenLabs API
+for text-to-speech with timestamps.
+
+ElevenLabs Text To Speech With Timestamps API: https://elevenlabs.io/docs/api-reference/text-to-speech-with-timestamps
+
+I acknowledge and thank ElevenLabs for providing the API functionality that contributed to the creation of this dataset.
+
+For more information about ElevenLabs and their services, please visit ElevenLabs website (https://elevenlabs.io).

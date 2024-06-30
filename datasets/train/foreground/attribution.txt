@@ -1,0 +1,10 @@
+Common Voice Dataset Attribution
+
+Dataset: Common Voice Corpus Delta Segment 17.0 (3/20/2024)
+Organization: Common Voice by Mozilla
+License: CC-0 (Public Domain)
+
+I acknowledge and thank Mozilla for providing the Common Voice dataset, which includes audio recordings contributed by volunteers worldwide.
+This dataset is released under the CC-0 license, allowing unrestricted use, redistribution, and modification.
+
+For more information and to access the dataset, please visit Common Voice website (https://commonvoice.mozilla.org/en).
