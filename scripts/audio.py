@@ -24,7 +24,7 @@ def play_audio(audio_name, start_time, duration):
 
     # Check if the duration is too short to be played.
     if duration < 0.047:
-        print(f'Audio duration is too short, the minimum duration is 0.047 seconds. '
+        print(f'Audio duration is too short, the minimum duration is 0.047 seconds.\n'
               f'Given duration: {duration:.3f} seconds.')
         return
 
