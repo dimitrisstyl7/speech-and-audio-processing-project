@@ -1,7 +1,7 @@
 # Speech and Audio Processing: Word Detection System
 
 ## [University of Piraeus](https://www.unipi.gr/en/home/) | [Department of Informatics](https://cs.unipi.gr/en/)
-**Course**: Speech and Audio Processing
+**BSc course**: Speech and Audio Processing
 
 **Semester**: 8
 
@@ -64,7 +64,7 @@ python word_detector.py
 - To successfully play audio through the `word_detector.py` program, you must have [VLC media player](https://www.videolan.org/vlc/) installed on your computer.
 
 ## Acknowledgments
-This project was developed as part of the "Speech and Audio Processing" course at the University of Piraeus. Contributions and feedback are always welcome!
+This project was developed as part of the "Speech and Audio Processing" BSc course at the University of Piraeus. Contributions and feedback are always welcome!
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
