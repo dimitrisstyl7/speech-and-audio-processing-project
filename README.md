@@ -15,11 +15,11 @@ an efficient and speaker-independent solution for speech recognition tasks, util
 ## How to Run
 1. **Clone the repository**:
 ```bash
-git clone https://github.com/dimitrisstyl7/speech-and-audio-processing-project-2024.git
+git clone https://github.com/dimitrisstyl7/speech-and-audio-processing-project.git
 ```
 2. **Navigate to the project directory**:
 ```bash
-cd speech-and-audio-processing-project-2024
+cd speech-and-audio-processing-project
 ```
 3. **Create and activate a virtual environment**:
 
